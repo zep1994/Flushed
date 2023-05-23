@@ -6,7 +6,11 @@ public partial class App : Application
 	{
 		InitializeComponent();
 
-		MainPage = new AppShell();
+		var navPage = new NavigationPage(new MainPage());
+		navPage.BackgroundColor = Colors.Purple;
+		navPage.BarTextColor = Colors.White;
+
+		MainPage = navPage;
 	}
 }
 
