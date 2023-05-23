@@ -1,6 +1,6 @@
 ﻿namespace Flushed;
 
-public partial class TabbedContent : ContentPage
+public partial class TabbedContent : TabbedPage
 {
 	public TabbedContent()
 	{

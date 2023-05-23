@@ -57,10 +57,20 @@
 	<ItemGroup>
 	  <None Remove="Resources\Images\Screenshot 2023-05-23 at 8.37.04 AM.png" />
 	  <None Remove="Resources\Images\logo.png" />
+	  <None Remove="Resources\Images\ApplicationRoot.png" />
+	  <None Remove="Resources\Images\ArrowDownEnd.png" />
+	  <None Remove="Resources\Images\ArrowUpEnd.png" />
+	  <None Remove="Resources\Images\ArtboardSplit.png" />
+	  <None Remove="Resources\Images\ASerif.png" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Images\logo.png" />
 	  <BundleResource Include="Resources\Images\logo.png" />
 	  <BundleResource Include="Resources\Images\logo.png" />
+	  <BundleResource Include="Resources\Images\applicationroot.png" />
+	  <BundleResource Include="Resources\Images\arrowdownend.png" />
+	  <BundleResource Include="Resources\Images\arrowupend.png" />
+	  <BundleResource Include="Resources\Images\artboard.png" />
+	  <BundleResource Include="Resources\Images\aserif.png" />
 	</ItemGroup>
 </Project>
