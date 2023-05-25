@@ -35,6 +35,13 @@
                 Clicked="OnCounterClicked"
                 HorizontalOptions="Center" />
 
+            <Button
+                x:Name="OneCounterButton"
+                Text="Gut Attack"
+                SemanticProperties.Hint="Counts the number of times you click"
+                Clicked="OneButtonGutAttackAdder"
+                HorizontalOptions="Center" />
+
         </VerticalStackLayout>
     </ScrollView>
 
