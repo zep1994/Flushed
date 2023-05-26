@@ -21,4 +21,10 @@ public partial class NavPage : ContentPage
     {
         Navigation.PushAsync(new TabbedContent());
     }
+
+    void Button_Clicked_3(System.Object sender, System.EventArgs e)
+    {
+        Navigation.PushAsync(new BowelMovementPage());
+    }
+
 }

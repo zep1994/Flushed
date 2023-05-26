@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Flushed.BowelMovementPage"
              Title="BowelMovementPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+    <Entry x:Name="entry"
+       Placeholder="Enter text"
+       TextChanged="OnEntryTextChanged"
+       Completed="OnEntryCompleted" />
+
 </ContentPage>
