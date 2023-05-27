@@ -12,6 +12,8 @@
         <Button Text="Main Page" Clicked="Button_Clicked"/>
         <Button Text="Flyout Page" Clicked="Button_Clicked_1"/>
         <Button Text="Tabbed Page" Clicked="Button_Clicked_2"/>
+        <Button Text="Bowel Page" Clicked="Button_Clicked_3"/>
+
 
     </VerticalStackLayout>
 </ContentPage>
