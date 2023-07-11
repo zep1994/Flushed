@@ -1,34 +1,67 @@
+using Flushed_API.Data;
+using Flushed_API.Models;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<AppDbContext>(opt =>
+    opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 
-app.UseHttpsRedirection();
+//app.UseHttpsRedirection();
 
-var summaries = new[]
+
+
+//GET
+app.MapGet("api/ibs_count", async (AppDbContext context) =>
 {
-    "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-};
 
-app.MapGet("/weatherforecast", () =>
+    return Results.Ok(await context.IbsCount.Where(b => b.Id == 1).ToListAsync());
+});
+
+//POST
+app.MapPost("api/ibs_count", async (AppDbContext context, IbsCount ibsCount) =>
 {
-    var forecast = Enumerable.Range(1, 5).Select(index =>
-        new WeatherForecast
-        (
-            DateTime.Now.AddDays(index),
-            Random.Shared.Next(-20, 55),
-            summaries[Random.Shared.Next(summaries.Length)]
-        ))
-        .ToArray();
-    return forecast;
+    await context.IbsCount.AddAsync(ibsCount);
+    await context.SaveChangesAsync();
+
+    return Results.Created($"api/ibs_count/{ibsCount.Id}", ibsCount);
+});
+
+//UPDATE
+app.MapPut("api/ibs_count/{id}", async (AppDbContext context, int id, IbsCount ibsCount) =>
+{
+    var ibsModel = await context.IbsCount.FirstOrDefaultAsync(x => x.Id == id);
+
+    if (ibsModel == null)
+    {
+        return Results.NotFound();
+    }
+
+    ibsModel.Count = ibsCount.Count;
+    await context.SaveChangesAsync();
+
+    return Results.NoContent();
+
+});
+
+app.MapDelete("api/ibs_count/{id}", async (AppDbContext context, int id) =>
+{
+    var ibsModel = await context.IbsCount.FirstOrDefaultAsync(x => x.Id == id);
+
+    if (ibsModel == null)
+    {
+        return Results.NotFound();
+    }
+
+    context.IbsCount.Remove(ibsModel);
+
+    await context.SaveChangesAsync();
+
+    return Results.NoContent();
 });
 
 app.Run();
-
-internal record WeatherForecast(DateTime Date, int TemperatureC, string? Summary)
-{
-    public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
-}
+ 
