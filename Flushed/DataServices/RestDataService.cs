@@ -29,9 +29,31 @@ namespace Flushed.DataServices
         }
 
 
-        public Task AddIbsCountAsync(IbsCount ibsCount)
+        public async Task AddIbsCountAsync(IbsCount ibsCount)
         {
-            throw new NotImplementedException();
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+            {
+                Debug.WriteLine("----- No Internet Access -----");
+                return;
+            }
+                try
+                {
+                    string jsonIbsCount = JsonSerializer.Serialize<IbsCount>(ibsCount, _jsonSerializeOptions);
+                    StringContent content = new StringContent(jsonIbsCount, Encoding.UTF8, "application/json");
+
+                    HttpResponseMessage response = await _httpClient.PostAsync($"{_url}/ibs_count", content);
+                    
+                    if(response.IsSuccessStatusCode)
+                    {
+                        Debug.WriteLine($"{response.StatusCode}");
+                    }
+
+                } catch (Exception ex)
+                {
+                    Debug.WriteLine(ex.ToString());
+                }
+
+                return;
         }
 
         public async Task<List<IbsCount>> GetIbsCountAsync()
@@ -66,14 +88,62 @@ namespace Flushed.DataServices
             return results;
         }
 
-        public Task UpdateIbsCountAsync(IbsCount ibsCount)
+        public async Task UpdateIbsCountAsync(IbsCount ibsCount)
         {
-            throw new NotImplementedException();
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+            {
+                Debug.WriteLine("----- No Internet Access -----");
+                return;
+            }
+            try
+            {
+                string jsonIbsCount = JsonSerializer.Serialize<IbsCount>(ibsCount, _jsonSerializeOptions);
+                StringContent content = new StringContent(jsonIbsCount, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = await _httpClient.PutAsync($"{_url}/ibs_count/{ibsCount.Id}", content);
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine($"{response.StatusCode}");
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex.ToString());
+            }
+
+            return;
         }
 
-        public Task DeleteIbsCountAsync(int id)
+        public async Task DeleteIbsCountAsync(int id)
         {
-            throw new NotImplementedException();
+            if (Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+            {
+                Debug.WriteLine("----- No Internet Access -----");
+                return;
+            }
+
+            try
+            {
+                HttpResponseMessage response = await _httpClient.DeleteAsync($"{_url}/ibs_count/{id}");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine("---- Success HTTP 2xx response");
+
+                }
+                else
+                {
+                    Debug.WriteLine("---- Not HTTP 2xx response");
+                }
+            } 
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"{ex.Message}");
+            }
+
+            return;
         }
     }
 }
