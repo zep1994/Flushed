@@ -1,6 +1,7 @@
 ﻿using Flushed.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Text.Json;
@@ -33,9 +34,36 @@ namespace Flushed.DataServices
             throw new NotImplementedException();
         }
 
-        public Task<List<IbsCount>> GetIbsCountAsync()
+        public async Task<List<IbsCount>> GetIbsCountAsync()
         {
-            throw new NotImplementedException();
+            List<IbsCount> results = new List<IbsCount>();
+
+            if(Connectivity.Current.NetworkAccess != NetworkAccess.Internet)
+            {
+                Debug.WriteLine("----- No Internet Access -----");
+                return results;
+            }
+
+            try
+            {
+                HttpResponseMessage response = await _httpClient.GetAsync($"{_url}/ibs_count");
+
+                if (response.IsSuccessStatusCode)
+                {
+                    string content = await response.Content.ReadAsStringAsync();
+
+                    results = JsonSerializer.Deserialize<List<IbsCount>>(content, _jsonSerializeOptions);
+                } else
+                {
+                    Debug.WriteLine("---- Not HTTP 2xx response");
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine($"{ex.Message}");
+            }
+
+            return results;
         }
 
         public Task UpdateIbsCountAsync(IbsCount ibsCount)
