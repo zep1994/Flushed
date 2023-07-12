@@ -1,4 +1,6 @@
-﻿namespace Flushed;
+﻿using Flushed.DataServices;
+
+namespace Flushed;
 
 public static class MauiProgram
 {
@@ -13,7 +15,11 @@ public static class MauiProgram
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
 			});
 
-		return builder.Build();
+        builder.Services.AddSingleton<IRestDataService, RestDataService>();
+
+        builder.Services.AddSingleton<MainPage>();
+
+        return builder.Build();
 	}
 }
 

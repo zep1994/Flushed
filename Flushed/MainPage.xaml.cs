@@ -1,35 +1,34 @@
-﻿namespace Flushed;
+﻿using Flushed.DataServices;
+using System.Diagnostics;
+
+namespace Flushed;
 
 public partial class MainPage : ContentPage
 {
+    private readonly IRestDataService _dataService;
 
-	int count = 0;
-
-	public MainPage()
-	{
-		InitializeComponent();
-	}
-
-	private void OnCounterClicked(object sender, EventArgs e)
-	{
-		Navigation.PushAsync(new NavPage());
-	}
-
-    private void GlobalCounterBtn(object sender, EventArgs e)
+    public MainPage(IRestDataService dataService)
     {
-        Navigation.PushAsync(new NavPage());
+        InitializeComponent();
+
+        _dataService = dataService;
     }
 
-    private void OneButtonGutAttackAdder(object sender, EventArgs e)
+    protected async override void OnAppearing()
     {
-        count++;
+        base.OnAppearing();
 
-        if (count == 1)
-            OneCounterButton.Text = $"Clicked {count} time";
-        else
-            OneCounterButton.Text = $"Clicked {count} times";
+        collectionView.ItemsSource = await _dataService.GetIbsCountAsync();
+    }
 
-        SemanticScreenReader.Announce(OneCounterButton.Text);
+    public async void OnAddToDoClicked(object sender, EventArgs e)
+    {
+        Debug.WriteLine("---> Add button clicked!");
+    }
+
+    public static async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+        Debug.WriteLine("---> Item changed clicked!");
     }
 
 }
