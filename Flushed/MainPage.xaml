@@ -9,14 +9,8 @@
             Padding="30,0"
             VerticalOptions="Center">
 
-            <Image
-                Source="logo .png"
-                SemanticProperties.Description="Cute dot net bot waving hi to you!"
-                HeightRequest="100"
-                HorizontalOptions="Center" />
-
             <Label
-                Text="Hello, User!"
+                Text="Hello, Flusher!"
                 SemanticProperties.HeadingLevel="Level1"
                 FontSize="32"
                 HorizontalOptions="Center" />
@@ -26,20 +20,6 @@
                 SemanticProperties.HeadingLevel="Level2"
                 SemanticProperties.Description="Welcome to dot net Multi platform App U I"
                 FontSize="18"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="CounterBtn"
-                Text="Navigation Page"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
-                HorizontalOptions="Center" />
-
-            <Button
-                x:Name="OneCounterButton"
-                Text="Gut Attack"
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OneButtonGutAttackAdder"
                 HorizontalOptions="Center" />
 
         </VerticalStackLayout>
