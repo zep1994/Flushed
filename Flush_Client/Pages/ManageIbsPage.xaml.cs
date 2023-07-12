@@ -24,7 +24,7 @@ public partial class ManageIbsPage : ContentPage
 
     public ManageIbsPage(IRestDataService dataService)
 	{
-		InitializeComponent();
+        InitializeComponent();
 
         _dataService = dataService;
         BindingContext = this;
@@ -42,11 +42,13 @@ public partial class ManageIbsPage : ContentPage
         if (_isNew)
         {
             Debug.WriteLine("Button Clicked");
+            IbsCount.Count = IbsCount.Count + 1;
             await _dataService.AddIbsCountAsync(IbsCount);
         }
         else
         {
             Debug.WriteLine("Update Clicked");
+            IbsCount.Count = IbsCount.Count + 1;
             await _dataService.UpdateIbsCountAsync(IbsCount);
             await Shell.Current.GoToAsync("..");
 
@@ -66,5 +68,10 @@ public partial class ManageIbsPage : ContentPage
     async void OnCancelButtonClicked(object sender, EventArgs e)
     {
         await Shell.Current.GoToAsync("..");
+    }
+
+    private void Button_Clicked(object sender, EventArgs e)
+    {
+
     }
 }
