@@ -75,4 +75,13 @@
 	  <BundleResource Include="Resources\Images\artboard.png" />
 	  <BundleResource Include="Resources\Images\aserif.png" />
 	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="App.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="AppShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadUnhandledDeviceExceptionFlushedHideInfoBar="True" /></VisualStudio></ProjectExtensions>
 </Project>

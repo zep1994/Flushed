@@ -7,40 +7,28 @@ public partial class MainPage : ContentPage
 {
     private readonly IRestDataService _dataService;
 
-    int count = 0;
-
-    public MainPage()
+    public MainPage(IRestDataService dataService)
     {
         InitializeComponent();
-    }
-
-    public MainPage(IRestDataService dataService)
-	{
-		InitializeComponent();
 
         _dataService = dataService;
-	}
-
-    public MainPage(IRestDataService dataService, object dataService1) : this(dataService)
-    {
-        InitializeComponent();
     }
 
     protected async override void OnAppearing()
     {
         base.OnAppearing();
 
-        //collectionView.ItemsSource = await _dataService.GetIbsCountAsync();
+        collectionView.ItemsSource = await _dataService.GetIbsCountAsync();
     }
 
-    async void OnAddIbsCountClicked(object sender, EventArgs e)
+    public async void OnAddToDoClicked(object sender, EventArgs e)
     {
-        Debug.WriteLine("Success");
+        Debug.WriteLine("---> Add button clicked!");
     }
 
-    async void OnSelectClick(object sender, SelectionChangedEventArgs e)
+    public static async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-        Debug.WriteLine("Yes");
+        Debug.WriteLine("---> Item changed clicked!");
     }
 
 }

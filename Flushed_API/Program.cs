@@ -18,7 +18,7 @@ var app = builder.Build();
 app.MapGet("api/ibs_count", async (AppDbContext context) =>
 {
 
-    return Results.Ok(await context.IbsCount.Where(b => b.Id == 1).ToListAsync());
+    return Results.Ok(await context.IbsCount.Where(b => b.Count >= 1).ToListAsync());
 });
 
 //POST
