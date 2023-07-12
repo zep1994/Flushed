@@ -4,18 +4,25 @@
              x:Class="Flush_Client.Pages.ManageIbsPage"
              Title="Manage Ibs Count">
 
-    <ContentPage.Resources>
-        <Style TargetType="Button">
-            <Setter Property="Margin"
-                    Value="5,0,5,0" />
-        </Style>
-    </ContentPage.Resources>
-    
-    <VerticalStackLayout Margin="20">
+    <Grid RowDefinitions="*,Auto" ColumnDefinitions="*,*,*" ColumnSpacing="5">
+    <TableView Intent="Data" Grid.Row="0" Grid.ColumnSpan="3">
+        <TableRoot>
+            <TableSection Title="What do you want to do?">
+                <EntryCell Text="{Binding Path=IbsCount.Count}" Placeholder="Enter Item" />
+            </TableSection>
+        </TableRoot>
+    </TableView>
+        <Button Text="{Binding Path=IbsCount.Count}" Grid.Row="1" Grid.Column="0" Clicked="OnSaveButtonClicked" Margin="10,7" />
+        <Button Text="Delete" Grid.Row="1" Grid.Column="1" Clicked="OnDeleteButtonClicked" Margin="10,7" />
+        <Button Text="Cancel" Grid.Row="1" Grid.Column="2" Clicked="OnCancelButtonClicked" Margin="10,7" />
+    </Grid>
+
+
+    <!--<VerticalStackLayout Margin="20">
         <Label Text="Did you have an attack today?" Margin="30" />
-        <!--<Entry Text="{Binding Path=IbsCount.Count}" Placeholder="Enter Name" />-->
-        <Button Text="{Binding Path=IbsCount.Count}" Clicked="OnSaveButtonClicked" />
-        <Button Text="Delete" Clicked="OnDeleteButtonClicked" />
-        <Button Text="Cancel" Clicked="OnCancelButtonClicked" />
-    </VerticalStackLayout>
+        --><!--<Entry Text="{Binding Path=IbsCount.Count}" Placeholder="Enter Name" />--><!--
+        <Button Text="{Binding Path=IbsCount.Count}" Clicked="OnSaveButtonClicked" Margin="20,5" />
+        <Button Text="Delete" Clicked="OnDeleteButtonClicked" Margin="20,5" />
+        <Button Text="Cancel" Clicked="OnCancelButtonClicked" Margin="20,5" />
+    </VerticalStackLayout>-->
 </ContentPage>

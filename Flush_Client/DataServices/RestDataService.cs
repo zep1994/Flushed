@@ -16,9 +16,9 @@ namespace Flushed.DataServices
         private readonly string _url;
         private readonly JsonSerializerOptions _jsonSerializeOptions;
 
-        public RestDataService()
+        public RestDataService(HttpClient httpClient)
         {
-            _httpClient = new HttpClient();
+            _httpClient = httpClient;
             _baseAddress = DeviceInfo.Platform == DevicePlatform.Android ? "http://10.0.2.2:5035" : "https://localhost:7016";
             _url = $"{_baseAddress}/api";
 
