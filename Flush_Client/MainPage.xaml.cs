@@ -1,4 +1,6 @@
-﻿using Flushed.DataServices;
+﻿using Flush_Client.Pages;
+using Flushed.DataServices;
+using Flushed.Models;
 using System.Diagnostics;
 
 namespace Flush_Client
@@ -21,14 +23,32 @@ namespace Flush_Client
                 collectionView.ItemsSource = await _dataService.GetIbsCountAsync();
             }
 
-            private void OnAddToDoClicked(object sender, EventArgs e)
+            async void OnAddIbsClicked(object sender, EventArgs e)
             {
                 Debug.WriteLine("---> Add button clicked!");
+                
+                //name of object and the object to pass
+                var navigationParameter = new Dictionary<string, object>
+                {
+                    { nameof(IbsCount), new IbsCount() }
+                };
+
+                //pass to manage page
+                await Shell.Current.GoToAsync(nameof(ManageIbsPage), navigationParameter);
             }
 
-            private static void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
+            async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
             {
                 Debug.WriteLine("---> Item changed clicked!");
-            }
+
+                //name of object and the object to pass
+                var navigationParameter = new Dictionary<string, object>
+                    {
+                        { nameof(IbsCount), e.CurrentSelection.FirstOrDefault() as IbsCount }
+                    };
+
+                //pass to manage page
+                await Shell.Current.GoToAsync(nameof(ManageIbsPage), navigationParameter);
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Flushed.DataServices;
+﻿using Flush_Client.Pages;
+using Flushed.DataServices;
 
 namespace Flush_Client
 {
@@ -18,6 +19,7 @@ namespace Flush_Client
             builder.Services.AddSingleton<IRestDataService, RestDataService>();
 
             builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddTransient<ManageIbsPage>();
 
             return builder.Build();
         }
