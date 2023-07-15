@@ -13,7 +13,6 @@ var app = builder.Build();
 //app.UseHttpsRedirection();
 
 
-
 //GET
 app.MapGet("api/ibs_count", async (AppDbContext context) =>
 {
@@ -47,6 +46,7 @@ app.MapPut("api/ibs_count/{id}", async (AppDbContext context, int id, IbsCount i
 
 });
 
+//DELETE
 app.MapDelete("api/ibs_count/{id}", async (AppDbContext context, int id) =>
 {
     var ibsModel = await context.IbsCount.FirstOrDefaultAsync(x => x.Id == id);
@@ -62,6 +62,13 @@ app.MapDelete("api/ibs_count/{id}", async (AppDbContext context, int id) =>
 
     return Results.NoContent();
 });
+
+//GET INGREDIENT INFO
+//app.MapGet("https://api.edamam.com/api/nutrition-data?app_id=bde1907b&app_key=e6dc9e1a571e8e55c6335225a3c217b8&nutrition-type=cooking&ingr=beef", async () =>
+//{
+//    await Results.NoContent();
+//    return
+//})
 
 app.Run();
  
