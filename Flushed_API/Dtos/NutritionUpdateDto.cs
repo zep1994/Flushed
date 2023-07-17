@@ -2,7 +2,7 @@
 
 namespace Flushed_API.Dtos
 {
-    public class NutritionCreateDto
+    public class NutritionUpdateDto
     {
         public int Calories { get; set; }
 

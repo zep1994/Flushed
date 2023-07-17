@@ -1,3 +1,4 @@
+using AutoMapper;
 using Flushed_API.Data;
 using Flushed_API.Models;
 using Microsoft.EntityFrameworkCore;
@@ -7,11 +8,20 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<AppDbContext>(opt =>
     opt.UseNpgsql(builder.Configuration.GetConnectionString("PostgresConnection")));
 
+builder.Services.AddScoped<INutritionRepo, NutritionRepo>();
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 var app = builder.Build();
 
 
 //app.UseHttpsRedirection();
 
+
+app.MapGet("api/nutrition", async (INutritionRepo repo, IMapper mapper) =>
+{
+    var nutrition = await repo.GetAllNutritions();
+    return Results.Ok(mapper.Map<IEnumerable<Nutrition>>(nutrition));
+});
 
 //GET
 app.MapGet("api/ibs_count", async (AppDbContext context) =>
